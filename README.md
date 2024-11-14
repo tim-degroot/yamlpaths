@@ -66,6 +66,7 @@ For documentation on how to use `reaction_pypaths.py` see [MFTabriz/reaction_pyp
 
 ```yaml
 File location: /Data/Phenanthrene/DFT/C14H10-D/
+Energy type: Sum of electronic and zero-point Energies
 Diagrams:
   D9toD1:
     D9: D10

@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.com/MFTabriz/reaction_pypaths.svg?branch=master)](https://travis-ci.com/MFTabriz/reaction_pypaths)
-[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/MFTabriz/reaction_pypaths.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/MFTabriz/reaction_pypaths/context:python)
+<!-- [![Build Status](https://travis-ci.com/MFTabriz/reaction_pypaths.svg?branch=master)](https://travis-ci.com/MFTabriz/reaction_pypaths)
+[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/MFTabriz/reaction_pypaths.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/MFTabriz/reaction_pypaths/context:python) -->
 [![Code style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 ## reaction_pypaths
@@ -15,44 +15,17 @@ Check out the [matplotlib guide](https://matplotlib.org/tutorials/text/usetex.ht
 
 The script is written for python 3 and relies on the [matplotlib](https://matplotlib.org/) module for drawing the diagrams which in turn uses the [TeX document production system](https://tug.org/texlive/) for generating the formula/labels in the TeX format.
 
-### Example
+### yamlpaths
 
-```python
-import reaction_pypaths
-
-energy_diagram = reaction_pypaths.Diagram()
-
-# add the levels to the diagram
-formula1 = energy_diagram.add_level(1.1, "crazy formula $[ZX_2]_5^{+}$\n$AB_3$")
-PMM14 = energy_diagram.add_level(-0.1, "$(PMM14)_3$", True)
-PZX14_mix = energy_diagram.add_level(-0.5, "$(PZX14)_3 + P4$")
-transition_state = energy_diagram.add_level(0, "TS")
-p1 = energy_diagram.add_level(-1.1, "product 1")
-p2 = energy_diagram.add_level(-0.4, "product 2")
-
-# add links between the levels
-energy_diagram.add_link(formula1, PZX14_mix)
-energy_diagram.add_link(PMM14, PZX14_mix)
-energy_diagram.add_link(PZX14_mix, transition_state)
-energy_diagram.add_link(transition_state, p1)
-energy_diagram.add_link(transition_state, p2)
-
-# plot the diagram and save the final result to the file
-energy_diagram.plot("output.png")
-```
-
-![Sample diagram](https://github.com/MFTabriz/reaction_pypaths/raw/master/output.png)
-
-## yamlpaths
-
-A command line interface (CLI) to generate reaction path energy diagrams based on [YAML](https://yaml.org) files.
+A command line interface (CLI) that interfaces with reaction_pypaths to generate reaction path energy diagrams based on [YAML](https://yaml.org) files.
 
 ### Example
+
+Create a YAML file such as the following `Deuterium.yaml`:
 
 ```yaml
-# Deuterium.yaml
-File location: /Users/timdegroot/Documents/Thesis/Data/Phenanthrene/DFT/
-TS location: /Users/timdegroot/Documents/Thesis/Data/Phenanthrene/DFT/TS/
+File location: /Phenanthrene/DFT/
+TS location: /DFT/TS/
 File prefix: C14H10-
 File suffix: .log
 Diagrams:
@@ -66,7 +39,13 @@ Diagrams:
     D1: 
 ```
 
-```yamlpaths.py Deuterium.yaml```
+Execute the program:
+
+```bash
+yamlpaths.py Deuterium.yaml
+```
+
+![Sample diagram](https://github.com/MFTabriz/reaction_pypaths/raw/master/output.png)
 
 ### Usage
 
@@ -85,6 +64,8 @@ options:
   -o, --output OUTPUT   Output directory
 ```
 
+For documentation on how to use `reaction_pypaths.py` see [MFTabriz/reaction_pypaths](https://github.com/MFTabriz/reaction_pypaths?tab=readme-ov-file#example)
+
 ### License and attributions
 
-reaction_pypaths is available under the [GNU GPL v3+] (attribution: MFTabriz@github)
+reaction_pypaths is available under the [GNU GPL v3+](https://github.com/tim-degroot/reaction_pypaths/blob/master/LICENSE) (attribution: MFTabriz@github)

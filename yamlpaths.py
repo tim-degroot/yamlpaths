@@ -5,6 +5,7 @@ import yaml
 import reaction_pypaths
 import argparse
 
+
 def gauss_get_energy(filepath, energy):
     HARTREE_TO_EV = scipy.constants.physical_constants["Hartree energy in eV"][0]
     with open(filepath) as f:
@@ -20,8 +21,9 @@ def normalize_(values, normalize):
     normalized_values = {
         key: round((value - normalize), 2) for key, value in values.items()
     }
-    
+
     return normalized_values
+
 
 def get_values(file):
     with open(file) as f:
@@ -77,4 +79,10 @@ if __name__ == "__main__":
 
     values, order = get_values(args.yaml_file)
     for key, sub_order in order.items():
-        yaml_path(values, list(sub_order.keys()), f"{key}.png", args.output, normalize=args.normalize)
+        yaml_path(
+            values,
+            list(sub_order.keys()),
+            f"{key}.png",
+            args.output,
+            normalize=args.normalize,
+        )

@@ -1,5 +1,6 @@
-<!-- [![Build Status](https://travis-ci.com/MFTabriz/reaction_pypaths.svg?branch=master)](https://travis-ci.com/MFTabriz/reaction_pypaths)
-[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/MFTabriz/reaction_pypaths.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/MFTabriz/reaction_pypaths/context:python) -->
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=fff)](#)
+[![YAML](https://img.shields.io/badge/YAML-CB171E?logo=yaml&logoColor=fff)](#)
 [![Code style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 ## reaction_pypaths
@@ -84,4 +85,4 @@ foo@bar:~$ yamlpaths.py Deuterium.yaml
 
 ### License and attributions
 
-reaction_pypaths is available under the [GNU GPL v3+](https://github.com/tim-degroot/reaction_pypaths/blob/master/LICENSE) (attribution: MFTabriz@github)
+reaction_pypaths is available under the [GNU GPL v3+](https://github.com/tim-degroot/reaction_pypaths/blob/master/LICENSE) (attribution: MFTabriz@github, tim-degroot@github)

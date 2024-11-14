@@ -8,46 +8,41 @@ A simple yet flexible python script for drawing reaction path energy diagrams.
 
 ### Customization
 
-All the diagram parameters can be tweaked in the [configs.py](https://github.com/MFTabriz/reaction_pypaths/blob/master/configs.py) file.
+All the diagram parameters can be tweaked in the [configs.py](https://github.com/tim-degroot/reaction_pypaths/blob/master/configs.py) file.
 Check out the [matplotlib guide](https://matplotlib.org/tutorials/text/usetex.html) on the text rendering with LaTeX.
 
 ### Requirements
 
 The script is written for python 3 and relies on the [matplotlib](https://matplotlib.org/) module for drawing the diagrams which in turn uses the [TeX document production system](https://tug.org/texlive/) for generating the formula/labels in the TeX format.
 
-### yamlpaths
+## yamlpaths
 
-A command line interface (CLI) that interfaces with reaction_pypaths to generate reaction path energy diagrams based on [YAML](https://yaml.org) files.
+A command line interface (CLI) that uses [reaction_pypaths](https://github.com/MFTabriz/reaction_pypaths) to generate reaction path energy diagrams based on [YAML](https://yaml.org) files that contain energies or point to [Gaussian 16](https://gaussian.com/gaussian16/)  `.log` files.
 
-### Example
+### Installation
 
-Create a YAML file such as the following `Deuterium.yaml`:
-
-```yaml
-File location: /Phenanthrene/DFT/
-TS location: /DFT/TS/
-File prefix: C14H10-
-File suffix: .log
-Diagrams:
-  D9toD1:
-    D9: D10
-    D9to10: 
-    D10: 
-    D10to10a: 
-    D10a: 
-    D1to10a: 
-    D1: 
-```
-
-Execute the program:
+To be able to execute `yamlpaths.py` anywhere download the source code and make it executable and export it to `$PATH`:
 
 ```bash
-yamlpaths.py Deuterium.yaml
+chmod +x yamlpaths.py
+export PATH="/path/to/PAHMC/RRKM:$PATH"
 ```
 
-![Sample diagram](https://github.com/MFTabriz/reaction_pypaths/raw/master/output.png)
-
 ### Usage
+
+Create a YAML file containg the following:
+
+```yaml
+File location: /path/to/gaussian/output/
+Energy type: Sum of electronic and zero-point Energies 
+Diagrams: 
+  title:
+    x: x.log
+    y: 1.5
+    z: x 
+```
+
+The program will create all Diagrams as `title.png` which contains a diagram of the reaction along the path `x > y > z`. The values can be set as `int` or `float` numbers or they will be gathered using the  `Energy type` from the  Gaussian `.log` files. The program can use aliases to use the energy of another state in case of symmetries `z: x`.
 
 ```bash
 usage: yamlpaths.py [-h] [-n NORMALIZE] [-o OUTPUT] yaml_file
@@ -65,6 +60,27 @@ options:
 ```
 
 For documentation on how to use `reaction_pypaths.py` see [MFTabriz/reaction_pypaths](https://github.com/MFTabriz/reaction_pypaths?tab=readme-ov-file#example)
+
+### Example
+
+```yaml
+File location: /Data/Phenanthrene/DFT/C14H10-D/
+Diagrams:
+  D9toD1:
+    D9: D10
+    D9to10: C14H10-D9to10.log
+    D10: C14H10-D10.log
+    D10to10a: C14H10-D10to10a.log
+    D10a: C14H10-D10a.log
+    D1to10a: C14H10-D1to10a.log
+    D1: C14H10-D1.log
+```
+
+```bash
+foo@bar:~$ yamlpaths.py Deuterium.yaml
+```
+
+![Sample diagram](https://github.com/tim-degroot/reaction_pypaths/raw/master/output.png)
 
 ### License and attributions
 

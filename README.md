@@ -3,16 +3,20 @@
 [![Code style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 ## reaction_pypaths
+
 A simple yet flexible python script for drawing reaction path energy diagrams.
 
 ### Customization
+
 All the diagram parameters can be tweaked in the [configs.py](https://github.com/MFTabriz/reaction_pypaths/blob/master/configs.py) file.
 Check out the [matplotlib guide](https://matplotlib.org/tutorials/text/usetex.html) on the text rendering with LaTeX.
 
 ### Requirements
+
 The script is written for python 3 and relies on the [matplotlib](https://matplotlib.org/) module for drawing the diagrams which in turn uses the [TeX document production system](https://tug.org/texlive/) for generating the formula/labels in the TeX format.
 
 ### Example
+
 ```python
 import reaction_pypaths
 
@@ -36,7 +40,51 @@ energy_diagram.add_link(transition_state, p2)
 # plot the diagram and save the final result to the file
 energy_diagram.plot("output.png")
 ```
+
 ![Sample diagram](https://github.com/MFTabriz/reaction_pypaths/raw/master/output.png)
 
+## yamlpaths
+
+A command line interface (CLI) to generate reaction path energy diagrams based on [YAML](https://yaml.org) files.
+
+### Example
+
+```yaml
+# Deuterium.yaml
+File location: /Users/timdegroot/Documents/Thesis/Data/Phenanthrene/DFT/
+TS location: /Users/timdegroot/Documents/Thesis/Data/Phenanthrene/DFT/TS/
+File prefix: C14H10-
+File suffix: .log
+Diagrams:
+  D9toD1:
+    D9: D10
+    D9to10: 
+    D10: 
+    D10to10a: 
+    D10a: 
+    D1to10a: 
+    D1: 
+```
+
+```yamlpaths.py Deuterium.yaml```
+
+### Usage
+
+```bash
+usage: yamlpaths.py [-h] [-n NORMALIZE] [-o OUTPUT] yaml_file
+
+Generate reaction path energy diagrams from YAML
+
+positional arguments:
+  yaml_file             The path to the YAML file
+
+options:
+  -h, --help            show this help message and exit
+  -n, --normalize NORMALIZE
+                        The key to normalize the values
+  -o, --output OUTPUT   Output directory
+```
+
 ### License and attributions
+
 reaction_pypaths is available under the [GNU GPL v3+] (attribution: MFTabriz@github)

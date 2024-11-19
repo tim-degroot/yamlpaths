@@ -213,7 +213,9 @@ class Diagram:
 
                 min_energy = min(level.energy for level in self.levels)
                 max_energy = max(level.energy for level in self.levels)
-                plt.ylim(min(min_energy * 1.1, -0.1), max_energy * 1.1)
+                y_min = min(min_energy * 1.1, min_energy * 0.9)
+                y_max = max(max_energy * 1.1, max_energy * 0.9)
+                plt.ylim(y_min, y_max)
 
         if not output_file:
             output_file = "output.png"

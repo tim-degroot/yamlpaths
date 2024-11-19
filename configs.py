@@ -5,7 +5,7 @@ plot_height = 4  # diagram height in inch
 plot_dpi = 120
 plot_font = "sans"
 
-energy_axis_label = "$\Delta$E (eV)"
+energy_axis_label = r"$\Delta$E (eV)"
 energy_axis_label_fontsize = 12
 energy_axis_label_fontweight = "bold"
 

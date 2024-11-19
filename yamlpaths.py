@@ -29,9 +29,9 @@ def get_values(file):
     with open(file) as f:
         data = yaml.load(f, Loader=yaml.CLoader)
 
-    file_location = data["File location"]
-    energy_type = data["Energy type"]
-    order = data["Diagrams"]
+    file_location = data.get("File location")
+    energy_type = data.get("Energy type")
+    order = data.get("Diagrams")
     values = {}
 
     for sub_order in order.values():

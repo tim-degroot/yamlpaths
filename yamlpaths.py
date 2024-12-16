@@ -32,6 +32,7 @@ def get_values(file):
     file_location = data.get("File location")
     energy_type = data.get("Energy type")
     order = data.get("Diagrams")
+    ylim = data.get("ylim", None)
     values = {}
 
     for sub_order in order.values():
@@ -44,10 +45,10 @@ def get_values(file):
                 full_path = f"{file_location}{value}"
                 values[key] = gauss_get_energy(full_path, energy_type)
 
-    return values, order
+    return values, order, ylim
 
 
-def yaml_path(values, order, filename, folder, normalize):
+def yaml_path(values, order, filename, folder, normalize, ylim=None):
     energy_diagram = reaction_pypaths.Diagram()
 
     values = normalize_(values, normalize)
@@ -59,7 +60,26 @@ def yaml_path(values, order, filename, folder, normalize):
     for i in range(len(order) - 1):
         energy_diagram.add_link(levels[order[i]], levels[order[i + 1]])
 
-    energy_diagram.plot(f"{folder}{filename}")
+    if ylim:
+        energy_diagram.plot(f"{folder}{filename}", ylim=ylim)
+    else:
+        energy_diagram.plot(f"{folder}{filename}")
+
+
+def main(args):
+    values, order, ylim = get_values(args.yaml_file)
+    print(f"Processing {args.yaml_file}")
+    for key, sub_order in order.items():
+        print(f"Preparing {key}.png")
+        yaml_path(
+            values,
+            list(sub_order.keys()),
+            f"{key}.png",
+            args.output,
+            normalize=args.normalize,
+            ylim=ylim,
+        )
+    print(f"Processed {args.yaml_file} successfully")
 
 
 if __name__ == "__main__":
@@ -77,12 +97,4 @@ if __name__ == "__main__":
     parser.add_argument("-o", "--output", type=str, help="Output directory", default="")
     args = parser.parse_args()
 
-    values, order = get_values(args.yaml_file)
-    for key, sub_order in order.items():
-        yaml_path(
-            values,
-            list(sub_order.keys()),
-            f"{key}.png",
-            args.output,
-            normalize=args.normalize,
-        )
+    main(args)

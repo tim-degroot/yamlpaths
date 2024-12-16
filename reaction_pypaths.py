@@ -7,6 +7,7 @@ License: GPL v3+
 
 See example.py for a simple example of the usage
 """
+
 import sys
 from collections import namedtuple
 
@@ -129,10 +130,10 @@ class Diagram:
             style = configs.links_style
         self.links.append(Link(level_id1, level_id2, color, width, style))
 
-    def plot(self, output_file):
+    def plot(self, output_file, ylim=None):
         """
         plot the diagram
-
+        ylim : tuple (y_min, y_max) to set custom y-axis limits
         """
         self._adjust_positions()
 
@@ -213,8 +214,11 @@ class Diagram:
 
                 min_energy = min(level.energy for level in self.levels)
                 max_energy = max(level.energy for level in self.levels)
-                y_min = min(min_energy * 1.1, min_energy * 0.9)
-                y_max = max(max_energy * 1.1, max_energy * 0.9)
+                if ylim:
+                    y_min, y_max = ylim
+                else:
+                    y_min = min(min_energy * 1.1, min_energy * 0.9)
+                    y_max = max(max_energy * 1.1, max_energy * 0.9)
                 plt.ylim(y_min, y_max)
 
         if not output_file:

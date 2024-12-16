@@ -1,6 +1,7 @@
 """
 Configurations for the reaction_pypaths
 """
+
 plot_height = 4  # diagram height in inch
 plot_dpi = 120
 plot_font = "sans"

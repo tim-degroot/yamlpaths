@@ -19,7 +19,7 @@ energy_tags_fontsize = 13
 energy_tags_fontweight = "normal"
 energy_tags_offset = 0.1
 
-level_labels_color = "blue"
+level_labels_color = "black"
 level_labels_fontsize = 13
 level_labels_fontweight = "bold"
 level_labels_offset = 0.2
